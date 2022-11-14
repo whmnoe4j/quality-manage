@@ -279,6 +279,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 
 ### 2.6 已经有的稽核rule说明
 **distinct_count:**
+
 说明:判断某个字段的去重count是否在一个上下范围内,阈值的设置在稽核规则表的`range_min`与`range_max`字段上设置
 ```json
 {
@@ -290,6 +291,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 ```
 
 **total_count:**
+
 说明:判断某字段的总数是否在一个上下范围内,阈值的设置在稽核规则表的`range_min`与`range_max`字段上设置
 ```json
 {
@@ -312,7 +314,9 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 
 
 **下面是未完成的稽核规则:**
+
 **null_count:**
+
 说明:空值阈值判断稽核
 ```json
 {
@@ -324,6 +328,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 ```
 
 **single_value_check:**
+
 说明:单值检测稽核
 ```json
 {
@@ -335,6 +340,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 ```
 
 **two_value_compare:**
+
 说明:两值比较稽核
 ```json
 {

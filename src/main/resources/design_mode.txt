@@ -1,0 +1,6 @@
+单例模式 :applicationContext注册bean
+建造者模式: 构建sourceFacade与sinkFacade
+外观模式 ： SourceFacade与SinkFacade对数据源统一处理  (其实SourceFacade与SinkFacade很下像观察者模式)
+策略模式：稽核规则的配置
+模板方法模式：source中ResultSetExtractor就是模板方法模式  (此处不是模板方法，但ResultSetExtractor确实很好用，值得参考)
+代理模式：在AbstractStrategy.deal()代理了DistinctCount执行sinkFacade.execute()

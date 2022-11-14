@@ -100,19 +100,19 @@ db.mysql.password=mysql
 
 ### 2.3 注解说明
 
-1.**`@RegisterBean`**注解：
+1.`@RegisterBean`注解：
 `@RegisterBean`注解是将此类注册到容器中管理
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141621150.png)
 
 
 
-2.**`@StrategyAnnotation`**注解：
+2.`@StrategyAnnotation`注解：
 `@StrategyAnnotation`注解写在策略类上，在运行`QualityApplication`主类的时候，可以将策略注册进去
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141623888.png)
 
 
 
-3.**`@BeforeExit`**注解：
+3.`@BeforeExit`注解：
 `@BeforeExit`写在source和sink的close()方法上，这样在程序结束运行前，会自动关闭数据库连接
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141625067.png)
 
@@ -125,9 +125,9 @@ db.mysql.password=mysql
 目前已经开发好的source有impala和mysql
 
 开发新source其实很简单，拿mysql为例:
-1.在`MysqlSource`类上添加`@RegisterBean`注解交给容器管理，将`MysqlSource`类继承`JDBCSource`抽象类
-2.实现`open()`与`close()`方法,并在`close()`方法上添加`@BeforeExit`注解，以在程序运行结束前关闭连接
-3.在`MysqlSource(JDBCEntity jdbcEntity)`构造方法中调用`open()`方法来创建`Connection`
+1. 在`MysqlSource`类上添加`@RegisterBean`注解交给容器管理，将`MysqlSource`类继承`JDBCSource`抽象类
+2. 实现`open()`与`close()`方法,并在`close()`方法上添加`@BeforeExit`注解，以在程序运行结束前关闭连接
+3. 在`MysqlSource(JDBCEntity jdbcEntity)`构造方法中调用`open()`方法来创建`Connection`
 ```java
 /**
  * @Author Xichuan
@@ -172,7 +172,7 @@ public class MysqlSource extends JDBCSource{
     }
 }
 ```
-4.在`QualityApplication`主类中注册`MysqlSource`
+4. 在`QualityApplication`主类中注册`MysqlSource`
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141640424.png)
 
 
@@ -182,9 +182,9 @@ public class MysqlSource extends JDBCSource{
 目前已经开发好的sink有Console和mysql
 
 开发新JDBC Sink其实很简单，拿mysql为例:
-1.在`MysqlAuditSink`类上添加`@RegisterBean`注解交给容器管理，并将`MysqlAuditSink`类继承`JDBCSink`抽象类,并实现Sink接口
-2.实现`open()`、`close()`和`write()`方法,并在`close()`方法上添加`@BeforeExit`注解，以在程序运行结束前关闭连接
-3.在`MysqlAuditSink(JDBCEntity jdbcEntity)`构造方法中调用`open()`方法来创建`Connection`
+1. 在`MysqlAuditSink`类上添加`@RegisterBean`注解交给容器管理，并将`MysqlAuditSink`类继承`JDBCSink`抽象类,并实现Sink接口
+2. 实现`open()`、`close()`和`write()`方法,并在`close()`方法上添加`@BeforeExit`注解，以在程序运行结束前关闭连接
+3. 在`MysqlAuditSink(JDBCEntity jdbcEntity)`构造方法中调用`open()`方法来创建`Connection`
 ```java
 /**
  * @Author Xichuan
@@ -272,7 +272,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 }
 
 ```
-4.在`QualityApplication`主类上注册`MysqlAuditSink`
+4. 在`QualityApplication`主类上注册`MysqlAuditSink`
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141655338.png)
 
 
@@ -353,8 +353,8 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 
 ### 2.7 开发新稽核rule说明
 因为已经封装了稽核规则抽象类，稽核规则开发其实也很简单，我们拿`DistinctCount`这个稽核rule来举例:
-1.在`DistinctCount`类上添加`@RegisterBean`与`@StrategyAnnotation`与注解，从而在程序开始运行的时候将该rule注册到稽核容器中
-2.继承`AbstractStrategy`抽象类，并实现`parseJson()`方法来解析rule的json规则;实现`resolve()`方法来实现稽核处理,并输出稽核结果
+1. 在`DistinctCount`类上添加`@RegisterBean`与`@StrategyAnnotation`与注解，从而在程序开始运行的时候将该rule注册到稽核容器中
+2. 继承`AbstractStrategy`抽象类，并实现`parseJson()`方法来解析rule的json规则;实现`resolve()`方法来实现稽核处理,并输出稽核结果
 ```java
 /**
  * @Author Xichuan
@@ -423,16 +423,16 @@ public class DistinctCount extends AbstractStrategy<BaseRule> implements Strateg
 
 
 ## 3.项目运行示例
-1.运行的参数中加上稽核规则id
+1. 运行的参数中加上稽核规则id
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141544270.png)
 
-2.运行程序
+2. 运行程序
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141725350.png)
 
-3.查看mysql中的稽核结果
+3. 查看mysql中的稽核结果
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141726879.png)
 
-4.简单的邮件告警，会将昨天失败的稽核结果发送到邮箱
+4. 简单的邮件告警，会将昨天失败的稽核结果发送到邮箱
 ![](https://raw.githubusercontent.com/Raray-chuan/xichuan_blog_pic/main/img/202211141724477.png)
 
 

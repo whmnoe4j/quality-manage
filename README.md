@@ -303,6 +303,7 @@ public class MysqlAuditSink extends JdbcSink implements Sink<AuditResult> {
 ```
 
 **custom_sql:**
+
 说明:自定义sql稽核,稽核后的结果字段是`is_pass`,`T`:稽核通过,`F`:稽核不通过
 ```json
 {

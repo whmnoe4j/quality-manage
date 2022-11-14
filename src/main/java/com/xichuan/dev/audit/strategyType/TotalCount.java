@@ -73,7 +73,7 @@ public class TotalCount extends AbstractStrategy<BaseRule> implements Strategy {
             auditResult.setIsPass(count <= Integer.valueOf(auditRule.getRangeMin()) ? Constants.RULE_RESULT_NOT_PASS : Constants.RULE_RESULT_PASS);
             auditResult.setRuleId(auditRule.getId());
         } catch (Exception e) {
-            logger.error("处理distinct_count异常！," + e.getMessage());
+            logger.error("run total_count rule exception！," + e.getMessage());
             e.printStackTrace();
         }
 

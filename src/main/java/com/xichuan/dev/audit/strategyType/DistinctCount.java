@@ -71,7 +71,7 @@ public class DistinctCount extends AbstractStrategy<BaseRule> implements Strateg
             auditResult.setIsPass(Constants.RULE_RESULT_PASS);
             auditResult.setRuleId(auditRule.getId());
         } catch (Exception e) {
-            logger.error("处理distinct_count异常！,"+e.getMessage());
+            logger.error("run distinct_count rule exception！,"+e.getMessage());
             e.printStackTrace();
         }
 

@@ -68,7 +68,7 @@ public class CustomSQL extends AbstractStrategy<CustomSQLRule>{
             auditResult.setIsPass(cr.getIsPass());
             auditResult.setRuleId(auditRule.getId());
         } catch (Exception e) {
-            logger.error("处理distinct_count异常！,"+e.getMessage());
+            logger.error("run custom_sql rule exception！,"+e.getMessage());
             e.printStackTrace();
         }
 
